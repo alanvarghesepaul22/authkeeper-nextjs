@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { IoAddCircleOutline } from "react-icons/io5";
+import { AiOutlineFolderAdd } from "react-icons/ai";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-const AddNewBtn = ({ title, variant }) => {
+const NewGroupBtn = ({ title, variant }) => {
   return (
     <>
       <Dialog>
@@ -24,15 +24,15 @@ const AddNewBtn = ({ title, variant }) => {
               "group flex justify-start gap-x-3 p-2 text-sm tracking-wide leading-6"
             )}
             variant={variant}
-            title="Add new"
+            title="New Group"
           >
-            <IoAddCircleOutline className="h-6 w-6 shrink-0" />
+            <AiOutlineFolderAdd className="h-6 w-6 shrink-0" />
             {title && <p className="hidden md:flex">{title}</p>}
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add Password</DialogTitle>
+            <DialogTitle>New Group</DialogTitle>
             <DialogDescription>
               Make changes to your profile here. Click save when you're done.
             </DialogDescription>
@@ -48,7 +48,7 @@ const AddNewBtn = ({ title, variant }) => {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit">Add Passsword</Button>
+            <Button type="submit">Create</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -56,4 +56,4 @@ const AddNewBtn = ({ title, variant }) => {
   );
 };
 
-export default AddNewBtn;
+export default NewGroupBtn;

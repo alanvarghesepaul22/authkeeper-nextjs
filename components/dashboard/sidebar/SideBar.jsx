@@ -6,6 +6,7 @@ import {
   IoPersonOutline,
   IoSettingsOutline,
 } from "react-icons/io5";
+import { LiaLayerGroupSolid } from "react-icons/lia";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
@@ -14,6 +15,8 @@ import { ModeToggle } from "@/components/mode-toggle";
 import AddNewBtn from "./AddNewBtn";
 import { cn } from "@/lib/utils";
 import LogoutBtn from "./LogoutBtn";
+import { Separator } from "@/components/ui/separator";
+import Pung from "@/components/ui/Pung";
 
 export function SideBar() {
   // const { data: session } = useSession();
@@ -29,8 +32,15 @@ export function SideBar() {
       current: `/${segment}` === "/dashboard" ? true : false,
     },
     {
+      name: "Groups",
+      href: "/groups",
+      title: "Groups",
+      icon: LiaLayerGroupSolid,
+      current: `/${segment}` === "/groups" ? true : false,
+    },
+    {
       name: "Profile",
-      href: "/dashboard/profile",
+      href: "/profile",
       title: "Profile",
       icon: IoPersonOutline,
       current: `/${segment}` === "/profile" ? true : false,
@@ -38,7 +48,7 @@ export function SideBar() {
 
     {
       name: "Settings",
-      href: "/dashboard/settings",
+      href: "/settings",
       title: "Settings",
       icon: IoSettingsOutline,
       current: `/${segment}` === "/settings" ? true : false,
@@ -74,6 +84,7 @@ export function SideBar() {
               </Link>
             </li>
           ))}
+          <Separator />
         </ul>
         <ul className="flex flex-col gap-3">
           <ModeToggle />
@@ -107,19 +118,21 @@ export function SideBar() {
               </Link>
             </li>
           ))}
+          <Separator />
         </ul>
         <ul className="flex flex-col gap-3">
           <li>
-            <p className="flex items-center justify-center dark:border-[1px] dark:hover:border-border duration-200 text-sm font-normal gap-7 rounded">
+            <p className="flex items-center justify-center border duration-200 text-sm font-normal gap-7 rounded">
               <VscColorMode />
               Theme
               <ModeToggle />
             </p>
           </li>
           <li>
-            <p className="flex items-center justify-center text-sm bg-neutral-200 dark:bg-neutral-900 dark:border-[1px] border-neutral-700 duration-200 font-bold capitalize py-2 px-2 gap-2 rounded">
+            <p className="flex items-center justify-center text-sm bg-accent dark:bg-neutral-900 border border-border duration-200 capitalize py-2 px-2 gap-2 rounded">
               {/* {session?.user?.name} */}
-              {/* <Pung /> */}
+              Alan Varghese Paul
+              <Pung />
             </p>
           </li>
           <LogoutBtn title="Logout" />
