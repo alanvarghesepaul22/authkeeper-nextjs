@@ -1,7 +1,7 @@
 import SignupPage from "@/components/auths/signup/SignupPage";
 import React from "react";
 
-const page = () => {
+const page = async () => {
   return (
     <div>
       <SignupPage />

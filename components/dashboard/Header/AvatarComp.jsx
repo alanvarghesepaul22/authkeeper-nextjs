@@ -7,23 +7,28 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useSession } from "next-auth/react";
 
 const AvatarComp = () => {
+  const { data: session } = useSession();
+
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger>
           <Avatar
             onClick={() => {
-              location.assign("dashboard/profile");
+              location.assign("/profile");
             }}
           >
-            <AvatarImage src="https://github.com/shadcn.png" />
-            <AvatarFallback>AVP</AvatarFallback>
+            {session && <AvatarImage src={session?.user?.image} />}
+            {session && (
+              <AvatarFallback>{session?.user?.name.charAt(0)}</AvatarFallback>
+            )}
           </Avatar>
         </TooltipTrigger>
         <TooltipContent>
-          <p>Alan Varghese Paul</p>
+          <p>{session?.user?.name}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

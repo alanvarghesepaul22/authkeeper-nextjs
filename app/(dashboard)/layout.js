@@ -3,10 +3,12 @@ import { SidebarProvider } from "@/context/SidebarContext";
 import { SideBar } from "@/components/dashboard/sidebar/SideBar";
 import Header from "@/components/dashboard/Header/Header";
 import Footer from "@/components/main/footer/Footer";
+import { NoSession } from "@/utils/Sessions";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  await NoSession();
   return (
     <SidebarProvider>
       <div className="max-h-screen flex flex-col">

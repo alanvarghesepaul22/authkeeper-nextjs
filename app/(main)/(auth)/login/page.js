@@ -1,12 +1,13 @@
-import LoginPage from '@/components/auths/login/LoginPage'
-import React from 'react'
+import LoginPage from "@/components/auths/login/LoginPage";
 
-const page = () => {
+import React from "react";
+
+const page = async () => {
   return (
     <div>
-        <LoginPage/>
+      <LoginPage />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

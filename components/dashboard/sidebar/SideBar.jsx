@@ -19,7 +19,7 @@ import { Separator } from "@/components/ui/separator";
 import Pung from "@/components/ui/Pung";
 
 export function SideBar() {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const { isLargeOpen, isSmallOpen, close } = useSidebarContext();
   const segment = useSelectedLayoutSegment();
 
@@ -125,13 +125,12 @@ export function SideBar() {
             <p className="flex items-center justify-center border duration-200 text-sm font-normal gap-7 rounded">
               <VscColorMode />
               Theme
-              <ModeToggle />
+              <ModeToggle variant="noOutline" />
             </p>
           </li>
           <li>
             <p className="flex items-center justify-center text-sm bg-accent dark:bg-neutral-900 border border-border duration-200 capitalize py-2 px-2 gap-2 rounded">
-              {/* {session?.user?.name} */}
-              Alan Varghese Paul
+              {session?.user?.name}
               <Pung />
             </p>
           </li>

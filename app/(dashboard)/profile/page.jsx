@@ -1,13 +1,14 @@
 import PageTitle from "@/components/dashboard/Body/PageTitle";
-import AddNewBtn from "@/components/dashboard/sidebar/AddNewBtn";
+import { ProfileForm } from "@/components/dashboard/Profile/ProfileForm";
 import React from "react";
 
 const page = () => {
   return (
     <div className="px-2 md:px-7">
-      <PageTitle title="Profile">
-        <AddNewBtn variant="outline" title="Add new" />
-      </PageTitle>
+      <PageTitle title="Profile"></PageTitle>
+      <div className="md:w-3/4 lg:w-2/4 px-2 my-10">
+        <ProfileForm />
+      </div>
     </div>
   );
 };
