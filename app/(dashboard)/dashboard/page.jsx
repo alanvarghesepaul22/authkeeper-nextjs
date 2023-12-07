@@ -1,5 +1,5 @@
-import { DataTable } from "@/components/dashboard/Body/DataTable";
 import PageTitle from "@/components/dashboard/Body/PageTitle";
+import PasswordTable from "@/components/dashboard/Body/PasswordTable";
 import AddNewBtn from "@/components/dashboard/sidebar/AddNewBtn";
 import React from "react";
 
@@ -9,7 +9,7 @@ const page = () => {
       <PageTitle title="Dashboard">
         <AddNewBtn variant="outline" title="Add new" />
       </PageTitle>
-      <DataTable />
+      <PasswordTable />
     </div>
   );
 };
