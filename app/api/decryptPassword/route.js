@@ -9,7 +9,7 @@ export async function POST(req) {
     return new NextResponse(orgPassword, { status: 200 });
   } catch (error) {
     return NextResponse.json(
-      { message: "An error occurred."+error },
+      { message: "An error occurred." + error },
       { status: 500 }
     );
   }

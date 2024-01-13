@@ -10,8 +10,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal } from "lucide-react";
+import EditBtn from "./EditBtn";
 
-const ActionDropdownMenu = () => {
+const ActionDropdownMenu = ({id}) => {
   return (
     <div>
       <DropdownMenu>
@@ -23,13 +24,10 @@ const ActionDropdownMenu = () => {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-          {/* <DropdownMenuItem
-            onClick={() => navigator.clipboard.writeText(payment.id)}
-          >
-            Copy ID
-          </DropdownMenuItem> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Edit</DropdownMenuItem>
+          {/* <DropdownMenuItem asChild> */}
+            <EditBtn id={id}/>
+          {/* </DropdownMenuItem> */}
           <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
