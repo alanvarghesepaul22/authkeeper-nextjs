@@ -93,6 +93,8 @@ const EditBtn = ({ id }) => {
     defaultValues: {
       siteName: "",
       username: "",
+      siteName: data.siteName,
+      username: data.username,
       password: orgPassword,
     },
   });
@@ -101,6 +103,8 @@ const EditBtn = ({ id }) => {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     // if (data.password == fieldData.password) {
     // }
+    if (data.password == fieldData.password) {
+    }
     await fetch(`http://localhost:3000/api/addNewPass/${id}`, {
       method: "PUT",
       headers: {
@@ -110,6 +114,8 @@ const EditBtn = ({ id }) => {
         siteName: fieldData.siteName,
         username: fieldData.username,
         password: fieldData.password,
+        password:
+          data.password == fieldData.password ? orgPass : fieldData.password,
       }),
     })
       .then(() => {
@@ -168,6 +174,7 @@ const EditBtn = ({ id }) => {
                             }}
                             // value={data.siteName}
                             value={sitename}
+                            value={data.siteName}
                           />
                         </FormControl>
                         <FormMessage />
