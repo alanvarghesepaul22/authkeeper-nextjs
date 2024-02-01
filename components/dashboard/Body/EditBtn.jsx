@@ -31,7 +31,6 @@ import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 const EditBtn = ({ id }) => {
   const [data, setData] = useState([]);
   const [orgPassword, setOrgPassword] = useState();
-  const [orgPass, setOrgPass] = useState();
   const [username, setUsername] = useState();
 
   const [sitename, setSitename] = useState();
@@ -50,7 +49,9 @@ const EditBtn = ({ id }) => {
           throw new Error("Failed to fetch password");
         }
         const data = await res.json();
-        setData(data);
+        // setData(data);
+        setSitename(data.siteName);
+        setUsername(data.username);
         setOrgPassword(data.password);
       } catch (error) {
         console.log(error);
@@ -75,7 +76,6 @@ const EditBtn = ({ id }) => {
       .then(async (res) => {
         const data = await res.text();
         setOrgPassword(data);
-        setOrgPass(data);
         setShowPassword(!showPassword);
         if (passDisabled) {
           setPassDisabled(false);
@@ -93,18 +93,12 @@ const EditBtn = ({ id }) => {
     defaultValues: {
       siteName: "",
       username: "",
-      siteName: data.siteName,
-      username: data.username,
       password: orgPassword,
     },
   });
 
   async function onSubmit(fieldData) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    // if (data.password == fieldData.password) {
-    // }
-    if (data.password == fieldData.password) {
-    }
     await fetch(`http://localhost:3000/api/addNewPass/${id}`, {
       method: "PUT",
       headers: {
@@ -114,8 +108,6 @@ const EditBtn = ({ id }) => {
         siteName: fieldData.siteName,
         username: fieldData.username,
         password: fieldData.password,
-        password:
-          data.password == fieldData.password ? orgPass : fieldData.password,
       }),
     })
       .then(() => {
@@ -174,7 +166,6 @@ const EditBtn = ({ id }) => {
                             }}
                             // value={data.siteName}
                             value={sitename}
-                            value={data.siteName}
                           />
                         </FormControl>
                         <FormMessage />
@@ -196,7 +187,8 @@ const EditBtn = ({ id }) => {
                             onChange={(e) => {
                               setUsername(e.target.value);
                             }}
-                            value={data.username}
+                            // value={data.username}
+                            value={username}
                           />
                         </FormControl>
                         <FormDescription>
