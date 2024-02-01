@@ -13,7 +13,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -28,6 +27,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { newPassformSchema } from "@/validators/PasswordFormValidation";
 import { useRouter } from "next/navigation";
+import FormBtn from "../Form/FormBtn";
 
 const AddNewBtn = ({ title, variant }) => {
   const router = useRouter();
@@ -43,6 +43,7 @@ const AddNewBtn = ({ title, variant }) => {
   });
 
   async function onSubmit(data) {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     await fetch("/api/addNewPass", {
       method: "POST",
       headers: {
@@ -155,7 +156,11 @@ const AddNewBtn = ({ title, variant }) => {
                 </div>
               </div>
               <DialogFooter>
-                <Button type="submit">Add Passsword</Button>
+                <FormBtn
+                  isSubmitting={form.formState.isSubmitting}
+                  title="Add Password"
+                  waitTitle="Adding"
+                />
               </DialogFooter>
             </form>
           </Form>

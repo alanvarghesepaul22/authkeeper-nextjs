@@ -61,7 +61,7 @@ const PasswordTable = () => {
                   <CopyButton val={password.password} ivVal={password.iv} />
                 </TableCell>
                 <TableCell>
-                  <ActionDropdownMenu />
+                  <ActionDropdownMenu id={password._id} />
                 </TableCell>
               </TableRow>
             );
