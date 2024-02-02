@@ -1,5 +1,6 @@
 import Password from "@/models/Password";
 import { connection } from "@/utils/db";
+import { encrypt } from "@/utils/encryptionHandler";
 import { NextResponse } from "next/server";
 
 export const PUT = async (req, { params }) => {
@@ -13,6 +14,8 @@ export const PUT = async (req, { params }) => {
     password: hashedPassword.password,
     iv: hashedPassword.iv,
   });
+  console.log("doonnneeee");
+  
   return NextResponse.json({ message: "Password Updated" }, { status: 200 });
 };
 

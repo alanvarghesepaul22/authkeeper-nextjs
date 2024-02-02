@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -13,6 +13,24 @@ import { MoreHorizontal } from "lucide-react";
 import EditBtn from "./EditBtn";
 
 const ActionDropdownMenu = ({id}) => {
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   const getPasswordById = async (id) => {
+  //     await fetch(`http://localhost:3000/api/addNewPass/${id}`, {
+  //       catch: "no-store",
+  //     })
+  //       .then(async (res) => {
+  //         const data = await res.json();
+  //         setData(data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
+  //   getPasswordById(id);
+  // }, []);
+
   return (
     <div>
       <DropdownMenu>
@@ -26,7 +44,7 @@ const ActionDropdownMenu = ({id}) => {
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
           <DropdownMenuSeparator />
           {/* <DropdownMenuItem asChild> */}
-            <EditBtn id={id}/>
+            <EditBtn id={id} />
           {/* </DropdownMenuItem> */}
           <DropdownMenuItem>Delete</DropdownMenuItem>
         </DropdownMenuContent>

@@ -25,74 +25,69 @@ import { newPassformSchema } from "@/validators/PasswordFormValidation";
 import { useRouter } from "next/navigation";
 import FormBtn from "../Form/FormBtn";
 import { Button } from "@/components/ui/button";
-import { decrypt } from "@/utils/encryptionHandler";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 const EditBtn = ({ id }) => {
-  const [data, setData] = useState([]);
   const [orgPassword, setOrgPassword] = useState();
   const [username, setUsername] = useState();
-
   const [sitename, setSitename] = useState();
+
   const [showPassword, setShowPassword] = useState(false);
   const [passDisabled, setPassDisabled] = useState(true);
 
   const router = useRouter();
   const { toast } = useToast();
+
   useEffect(() => {
     const getPasswordById = async (id) => {
-      try {
-        const res = await fetch(`http://localhost:3000/api/addNewPass/${id}`, {
-          catch: "no-store",
+      await fetch(`http://localhost:3000/api/addNewPass/${id}`, {
+        catch: "no-store",
+      })
+        .then(async (res) => {
+          const data = await res.json();
+          // setData(data);
+          setSitename(data.siteName);
+          setUsername(data.username);
+          await fetch("/api/decryptPassword", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              password: data.password,
+              iv: data.iv,
+            }),
+          })
+            .then(async (res) => {
+              const data = await res.text();
+              setOrgPassword(data);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-        if (!res.ok) {
-          throw new Error("Failed to fetch password");
-        }
-        const data = await res.json();
-        // setData(data);
-        setSitename(data.siteName);
-        setUsername(data.username);
-        setOrgPassword(data.password);
-      } catch (error) {
-        console.log(error);
-      }
     };
     getPasswordById(id);
   }, []);
 
   const toggleVisibility = async (e) => {
     e.preventDefault();
-
-    await fetch("/api/decryptPassword", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        password: data.password,
-        iv: data.iv,
-      }),
-    })
-      .then(async (res) => {
-        const data = await res.text();
-        setOrgPassword(data);
-        setShowPassword(!showPassword);
-        if (passDisabled) {
-          setPassDisabled(false);
-        } else {
-          setPassDisabled(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setShowPassword(!showPassword);
+    if (passDisabled) {
+      setPassDisabled(false);
+    } else {
+      setPassDisabled(true);
+    }
   };
 
   const form = useForm({
     resolver: zodResolver(newPassformSchema),
-    defaultValues: {
-      siteName: "",
-      username: "",
+    values: {
+      siteName: sitename,
+      username: username,
       password: orgPassword,
     },
   });
@@ -117,7 +112,7 @@ const EditBtn = ({ id }) => {
           description: "You've successfully updated password.",
         });
         form.reset();
-        router.refresh();
+        // router.refresh();
       })
       .catch((error) => {
         toast({
@@ -164,8 +159,6 @@ const EditBtn = ({ id }) => {
                             onChange={(e) => {
                               setSitename(e.target.value);
                             }}
-                            // value={data.siteName}
-                            value={sitename}
                           />
                         </FormControl>
                         <FormMessage />
@@ -187,8 +180,6 @@ const EditBtn = ({ id }) => {
                             onChange={(e) => {
                               setUsername(e.target.value);
                             }}
-                            // value={data.username}
-                            value={username}
                           />
                         </FormControl>
                         <FormDescription>
@@ -215,7 +206,6 @@ const EditBtn = ({ id }) => {
                               onChange={(e) => {
                                 setOrgPassword(e.target.value);
                               }}
-                              value={orgPassword}
                               disabled={passDisabled}
                             />
                             <Button variant="ghost" onClick={toggleVisibility}>
